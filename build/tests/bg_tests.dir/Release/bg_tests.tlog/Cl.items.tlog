@@ -1,2 +1,6 @@
 E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\tests\test_main.cpp;E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\build\tests\bg_tests.dir\Release\test_main.obj
 E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\tests\test_core.cpp;E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\build\tests\bg_tests.dir\Release\test_core.obj
+E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\tests\test_cuda.cpp;E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\build\tests\bg_tests.dir\Release\test_cuda.obj
+E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\tests\test_concurrency.cpp;E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\build\tests\bg_tests.dir\Release\test_concurrency.obj
+E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\tests\test_adversarial.cpp;E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\build\tests\bg_tests.dir\Release\test_adversarial.obj
+E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\tests\test_property.cpp;E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\build\tests\bg_tests.dir\Release\test_property.obj

@@ -57,11 +57,6 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   include("E:/The Journey/Coding/GitHub/production/Bandwidth-Governor/build/examples/cmake_install.cmake")
 endif()
 
-if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  # Include the install script for the subdirectory.
-  include("E:/The Journey/Coding/GitHub/production/Bandwidth-Governor/build/consumer/cmake_install.cmake")
-endif()
-
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   if(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Dd][Ee][Bb][Uu][Gg])$")
     file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "E:/The Journey/Coding/GitHub/production/Bandwidth-Governor/build/Debug/bgcore.lib")

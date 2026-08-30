@@ -1,6 +1,11 @@
 # BandwidthGovernor package configuration.
 @PACKAGE_INIT@
 
+include(CMakeFindDependencyMacro)
+if(@BG_CONFIG_WITH_CUDA@)
+  find_dependency(CUDAToolkit)
+endif()
+
 include("${CMAKE_CURRENT_LIST_DIR}/BandwidthGovernorTargets.cmake")
 
 check_required_components(BandwidthGovernor)

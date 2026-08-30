@@ -16,6 +16,9 @@ namespace bg {
 // Returns true when a CUDA device is present and usable (validated at runtime).
 bool cuda_backend_available();
 
+// Returns true when the CUDA runtime reports a healthy (error-free) state.
+bool cuda_ok();
+
 // Build a CUDA backend backing a host<->device transfer resource. Throws
 // bg::error if CUDA is unavailable.
 std::unique_ptr<Backend> make_cuda_backend(const ResourceSpec& resource);

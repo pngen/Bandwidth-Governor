@@ -25,6 +25,11 @@ endmacro()
 
 ####################################################################################
 
+include(CMakeFindDependencyMacro)
+if(1)
+  find_dependency(CUDAToolkit)
+endif()
+
 include("${CMAKE_CURRENT_LIST_DIR}/BandwidthGovernorTargets.cmake")
 
 check_required_components(BandwidthGovernor)

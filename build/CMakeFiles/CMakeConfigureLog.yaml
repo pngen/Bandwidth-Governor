@@ -57567,3 +57567,521 @@ events:
         - "C:/Program Files/CMake"
         - "C:/Program Files (x86)/BandwidthGovernor"
 ...
+
+---
+events:
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.3/Modules/FindCUDAToolkit.cmake:1101 (find_path)"
+      - "CMakeLists.txt:54 (find_package)"
+    mode: "path"
+    variable: "CUDAToolkit_CUBLAS_INCLUDE_DIR"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "cublas_v2.h"
+    candidate_directories:
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.9/include/"
+    found: "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.9/include/"
+    search_context:
+      ENV{PATH}:
+        - "C:\\Program Files\\WindowsApps\\Microsoft.PowerShell_7.6.5.0_x64__8wekyb3d8bbwe"
+        - "C:\\Program Files\\FireDaemon OpenSSL 4\\bin\\"
+        - "C:\\Program Files\\coreutils\\bin"
+        - "C:\\Program Files\\ImageMagick-7.1.2-Q16-HDRI"
+        - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.1\\bin\\x64"
+        - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v12.9\\bin"
+        - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v12.9\\libnvvp"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Users\\pauln\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\"
+        - "C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common"
+        - "C:\\Program Files\\NVIDIA Corporation\\NVIDIA App\\NvDLISR"
+        - "C:\\Ffmpeg\\bin"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files\\Go\\bin"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Program Files\\nodejs\\"
+        - "C:\\Program Files\\GitHub CLI\\"
+        - "C:\\Program Files\\Mullvad VPN\\resources"
+        - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.1\\bin"
+        - "C:\\Users\\pauln\\AppData\\Local\\Programs\\Python\\Python313\\Scripts\\"
+        - "C:\\Users\\pauln\\AppData\\Local\\Programs\\Python\\Python313\\"
+        - "C:\\Users\\pauln\\AppData\\Local\\Programs\\Python\\Launcher\\"
+        - "C:\\Users\\pauln\\.cargo\\bin"
+        - "C:\\Users\\pauln\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\pauln\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\pauln\\.lmstudio\\bin"
+        - "C:\\Users\\pauln\\AppData\\Local\\Pandoc\\"
+        - "C:\\Users\\pauln\\AppData\\Local\\Microsoft\\WinGet\\Links"
+        - "C:\\Users\\pauln\\AppData\\Local\\GitHubDesktop\\bin"
+        - "C:\\Users\\pauln\\go\\bin"
+        - "C:\\Users\\pauln\\AppData\\Local\\Microsoft\\WinGet\\Packages\\ggml.llamacpp_Microsoft.Winget.Source_8wekyb3d8bbwe"
+        - "C:\\Users\\pauln\\.deno\\bin"
+        - "C:\\Users\\pauln\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python313\\Scripts"
+        - "C:\\Users\\pauln\\AppData\\Local\\PowerToys\\DSCModules\\"
+        - "C:\\Users\\pauln\\AppData\\Roaming\\npm"
+        - "C:\\Users\\pauln\\bin"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/BandwidthGovernor"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "C:/Program Files"
+        - "C:/Program Files (x86)"
+        - "C:/Program Files/CMake"
+        - "C:/Program Files (x86)/BandwidthGovernor"
+...
+
+---
+events:
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.3/Modules/FindCUDAToolkit.cmake:1101 (find_path)"
+      - "CMakeLists.txt:54 (find_package)"
+    mode: "path"
+    variable: "CUDAToolkit_CUBLAS_INCLUDE_DIR"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "cublas_v2.h"
+    candidate_directories:
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.9/include/"
+    found: "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.9/include/"
+    search_context:
+      ENV{PATH}:
+        - "C:\\Program Files\\WindowsApps\\Microsoft.PowerShell_7.6.5.0_x64__8wekyb3d8bbwe"
+        - "C:\\Program Files\\FireDaemon OpenSSL 4\\bin\\"
+        - "C:\\Program Files\\coreutils\\bin"
+        - "C:\\Program Files\\ImageMagick-7.1.2-Q16-HDRI"
+        - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.1\\bin\\x64"
+        - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v12.9\\bin"
+        - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v12.9\\libnvvp"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Users\\pauln\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\"
+        - "C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common"
+        - "C:\\Program Files\\NVIDIA Corporation\\NVIDIA App\\NvDLISR"
+        - "C:\\Ffmpeg\\bin"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files\\Go\\bin"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Program Files\\nodejs\\"
+        - "C:\\Program Files\\GitHub CLI\\"
+        - "C:\\Program Files\\Mullvad VPN\\resources"
+        - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.1\\bin"
+        - "C:\\Users\\pauln\\AppData\\Local\\Programs\\Python\\Python313\\Scripts\\"
+        - "C:\\Users\\pauln\\AppData\\Local\\Programs\\Python\\Python313\\"
+        - "C:\\Users\\pauln\\AppData\\Local\\Programs\\Python\\Launcher\\"
+        - "C:\\Users\\pauln\\.cargo\\bin"
+        - "C:\\Users\\pauln\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\pauln\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\pauln\\.lmstudio\\bin"
+        - "C:\\Users\\pauln\\AppData\\Local\\Pandoc\\"
+        - "C:\\Users\\pauln\\AppData\\Local\\Microsoft\\WinGet\\Links"
+        - "C:\\Users\\pauln\\AppData\\Local\\GitHubDesktop\\bin"
+        - "C:\\Users\\pauln\\go\\bin"
+        - "C:\\Users\\pauln\\AppData\\Local\\Microsoft\\WinGet\\Packages\\ggml.llamacpp_Microsoft.Winget.Source_8wekyb3d8bbwe"
+        - "C:\\Users\\pauln\\.deno\\bin"
+        - "C:\\Users\\pauln\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python313\\Scripts"
+        - "C:\\Users\\pauln\\AppData\\Local\\PowerToys\\DSCModules\\"
+        - "C:\\Users\\pauln\\AppData\\Roaming\\npm"
+        - "C:\\Users\\pauln\\bin"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/BandwidthGovernor"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "C:/Program Files"
+        - "C:/Program Files (x86)"
+        - "C:/Program Files/CMake"
+        - "C:/Program Files (x86)/BandwidthGovernor"
+...
+
+---
+events:
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.3/Modules/FindCUDAToolkit.cmake:1101 (find_path)"
+      - "CMakeLists.txt:54 (find_package)"
+    mode: "path"
+    variable: "CUDAToolkit_CUBLAS_INCLUDE_DIR"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "cublas_v2.h"
+    candidate_directories:
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.9/include/"
+    found: "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.9/include/"
+    search_context:
+      ENV{PATH}:
+        - "C:\\Program Files\\WindowsApps\\Microsoft.PowerShell_7.6.5.0_x64__8wekyb3d8bbwe"
+        - "C:\\Program Files\\FireDaemon OpenSSL 4\\bin\\"
+        - "C:\\Program Files\\coreutils\\bin"
+        - "C:\\Program Files\\ImageMagick-7.1.2-Q16-HDRI"
+        - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.1\\bin\\x64"
+        - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v12.9\\bin"
+        - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v12.9\\libnvvp"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Users\\pauln\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\"
+        - "C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common"
+        - "C:\\Program Files\\NVIDIA Corporation\\NVIDIA App\\NvDLISR"
+        - "C:\\Ffmpeg\\bin"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files\\Go\\bin"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Program Files\\nodejs\\"
+        - "C:\\Program Files\\GitHub CLI\\"
+        - "C:\\Program Files\\Mullvad VPN\\resources"
+        - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.1\\bin"
+        - "C:\\Users\\pauln\\AppData\\Local\\Programs\\Python\\Python313\\Scripts\\"
+        - "C:\\Users\\pauln\\AppData\\Local\\Programs\\Python\\Python313\\"
+        - "C:\\Users\\pauln\\AppData\\Local\\Programs\\Python\\Launcher\\"
+        - "C:\\Users\\pauln\\.cargo\\bin"
+        - "C:\\Users\\pauln\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\pauln\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\pauln\\.lmstudio\\bin"
+        - "C:\\Users\\pauln\\AppData\\Local\\Pandoc\\"
+        - "C:\\Users\\pauln\\AppData\\Local\\Microsoft\\WinGet\\Links"
+        - "C:\\Users\\pauln\\AppData\\Local\\GitHubDesktop\\bin"
+        - "C:\\Users\\pauln\\go\\bin"
+        - "C:\\Users\\pauln\\AppData\\Local\\Microsoft\\WinGet\\Packages\\ggml.llamacpp_Microsoft.Winget.Source_8wekyb3d8bbwe"
+        - "C:\\Users\\pauln\\.deno\\bin"
+        - "C:\\Users\\pauln\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python313\\Scripts"
+        - "C:\\Users\\pauln\\AppData\\Local\\PowerToys\\DSCModules\\"
+        - "C:\\Users\\pauln\\AppData\\Roaming\\npm"
+        - "C:\\Users\\pauln\\bin"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/BandwidthGovernor"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "C:/Program Files"
+        - "C:/Program Files (x86)"
+        - "C:/Program Files/CMake"
+        - "C:/Program Files (x86)/BandwidthGovernor"
+...
+
+---
+events:
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.3/Modules/FindCUDAToolkit.cmake:1101 (find_path)"
+      - "CMakeLists.txt:54 (find_package)"
+    mode: "path"
+    variable: "CUDAToolkit_CUBLAS_INCLUDE_DIR"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "cublas_v2.h"
+    candidate_directories:
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.9/include/"
+    found: "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.9/include/"
+    search_context:
+      ENV{PATH}:
+        - "C:\\Program Files\\WindowsApps\\Microsoft.PowerShell_7.6.5.0_x64__8wekyb3d8bbwe"
+        - "C:\\Program Files\\FireDaemon OpenSSL 4\\bin\\"
+        - "C:\\Program Files\\coreutils\\bin"
+        - "C:\\Program Files\\ImageMagick-7.1.2-Q16-HDRI"
+        - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.1\\bin\\x64"
+        - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v12.9\\bin"
+        - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v12.9\\libnvvp"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Users\\pauln\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\"
+        - "C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common"
+        - "C:\\Program Files\\NVIDIA Corporation\\NVIDIA App\\NvDLISR"
+        - "C:\\Ffmpeg\\bin"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files\\Go\\bin"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Program Files\\nodejs\\"
+        - "C:\\Program Files\\GitHub CLI\\"
+        - "C:\\Program Files\\Mullvad VPN\\resources"
+        - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.1\\bin"
+        - "C:\\Users\\pauln\\AppData\\Local\\Programs\\Python\\Python313\\Scripts\\"
+        - "C:\\Users\\pauln\\AppData\\Local\\Programs\\Python\\Python313\\"
+        - "C:\\Users\\pauln\\AppData\\Local\\Programs\\Python\\Launcher\\"
+        - "C:\\Users\\pauln\\.cargo\\bin"
+        - "C:\\Users\\pauln\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\pauln\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\pauln\\.lmstudio\\bin"
+        - "C:\\Users\\pauln\\AppData\\Local\\Pandoc\\"
+        - "C:\\Users\\pauln\\AppData\\Local\\Microsoft\\WinGet\\Links"
+        - "C:\\Users\\pauln\\AppData\\Local\\GitHubDesktop\\bin"
+        - "C:\\Users\\pauln\\go\\bin"
+        - "C:\\Users\\pauln\\AppData\\Local\\Microsoft\\WinGet\\Packages\\ggml.llamacpp_Microsoft.Winget.Source_8wekyb3d8bbwe"
+        - "C:\\Users\\pauln\\.deno\\bin"
+        - "C:\\Users\\pauln\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python313\\Scripts"
+        - "C:\\Users\\pauln\\AppData\\Local\\PowerToys\\DSCModules\\"
+        - "C:\\Users\\pauln\\AppData\\Roaming\\npm"
+        - "C:\\Users\\pauln\\bin"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/BandwidthGovernor"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "C:/Program Files"
+        - "C:/Program Files (x86)"
+        - "C:/Program Files/CMake"
+        - "C:/Program Files (x86)/BandwidthGovernor"
+...
+
+---
+events:
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.3/Modules/FindCUDAToolkit.cmake:1101 (find_path)"
+      - "CMakeLists.txt:54 (find_package)"
+    mode: "path"
+    variable: "CUDAToolkit_CUBLAS_INCLUDE_DIR"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "cublas_v2.h"
+    candidate_directories:
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.9/include/"
+    found: "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.9/include/"
+    search_context:
+      ENV{PATH}:
+        - "C:\\Program Files\\WindowsApps\\Microsoft.PowerShell_7.6.5.0_x64__8wekyb3d8bbwe"
+        - "C:\\Program Files\\FireDaemon OpenSSL 4\\bin\\"
+        - "C:\\Program Files\\coreutils\\bin"
+        - "C:\\Program Files\\ImageMagick-7.1.2-Q16-HDRI"
+        - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.1\\bin\\x64"
+        - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v12.9\\bin"
+        - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v12.9\\libnvvp"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Users\\pauln\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\"
+        - "C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common"
+        - "C:\\Program Files\\NVIDIA Corporation\\NVIDIA App\\NvDLISR"
+        - "C:\\Ffmpeg\\bin"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files\\Go\\bin"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Program Files\\nodejs\\"
+        - "C:\\Program Files\\GitHub CLI\\"
+        - "C:\\Program Files\\Mullvad VPN\\resources"
+        - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.1\\bin"
+        - "C:\\Users\\pauln\\AppData\\Local\\Programs\\Python\\Python313\\Scripts\\"
+        - "C:\\Users\\pauln\\AppData\\Local\\Programs\\Python\\Python313\\"
+        - "C:\\Users\\pauln\\AppData\\Local\\Programs\\Python\\Launcher\\"
+        - "C:\\Users\\pauln\\.cargo\\bin"
+        - "C:\\Users\\pauln\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\pauln\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\pauln\\.lmstudio\\bin"
+        - "C:\\Users\\pauln\\AppData\\Local\\Pandoc\\"
+        - "C:\\Users\\pauln\\AppData\\Local\\Microsoft\\WinGet\\Links"
+        - "C:\\Users\\pauln\\AppData\\Local\\GitHubDesktop\\bin"
+        - "C:\\Users\\pauln\\go\\bin"
+        - "C:\\Users\\pauln\\AppData\\Local\\Microsoft\\WinGet\\Packages\\ggml.llamacpp_Microsoft.Winget.Source_8wekyb3d8bbwe"
+        - "C:\\Users\\pauln\\.deno\\bin"
+        - "C:\\Users\\pauln\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python313\\Scripts"
+        - "C:\\Users\\pauln\\AppData\\Local\\PowerToys\\DSCModules\\"
+        - "C:\\Users\\pauln\\AppData\\Roaming\\npm"
+        - "C:\\Users\\pauln\\bin"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/BandwidthGovernor"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "C:/Program Files"
+        - "C:/Program Files (x86)"
+        - "C:/Program Files/CMake"
+        - "C:/Program Files (x86)/BandwidthGovernor"
+...
+
+---
+events:
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.3/Modules/FindCUDAToolkit.cmake:1101 (find_path)"
+      - "CMakeLists.txt:54 (find_package)"
+    mode: "path"
+    variable: "CUDAToolkit_CUBLAS_INCLUDE_DIR"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "cublas_v2.h"
+    candidate_directories:
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.9/include/"
+    found: "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.9/include/"
+    search_context:
+      ENV{PATH}:
+        - "C:\\Program Files\\WindowsApps\\Microsoft.PowerShell_7.6.5.0_x64__8wekyb3d8bbwe"
+        - "C:\\Program Files\\FireDaemon OpenSSL 4\\bin\\"
+        - "C:\\Program Files\\coreutils\\bin"
+        - "C:\\Program Files\\ImageMagick-7.1.2-Q16-HDRI"
+        - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.1\\bin\\x64"
+        - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v12.9\\bin"
+        - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v12.9\\libnvvp"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Users\\pauln\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\"
+        - "C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common"
+        - "C:\\Program Files\\NVIDIA Corporation\\NVIDIA App\\NvDLISR"
+        - "C:\\Ffmpeg\\bin"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files\\Go\\bin"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Program Files\\nodejs\\"
+        - "C:\\Program Files\\GitHub CLI\\"
+        - "C:\\Program Files\\Mullvad VPN\\resources"
+        - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.1\\bin"
+        - "C:\\Users\\pauln\\AppData\\Local\\Programs\\Python\\Python313\\Scripts\\"
+        - "C:\\Users\\pauln\\AppData\\Local\\Programs\\Python\\Python313\\"
+        - "C:\\Users\\pauln\\AppData\\Local\\Programs\\Python\\Launcher\\"
+        - "C:\\Users\\pauln\\.cargo\\bin"
+        - "C:\\Users\\pauln\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\pauln\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\pauln\\.lmstudio\\bin"
+        - "C:\\Users\\pauln\\AppData\\Local\\Pandoc\\"
+        - "C:\\Users\\pauln\\AppData\\Local\\Microsoft\\WinGet\\Links"
+        - "C:\\Users\\pauln\\AppData\\Local\\GitHubDesktop\\bin"
+        - "C:\\Users\\pauln\\go\\bin"
+        - "C:\\Users\\pauln\\AppData\\Local\\Microsoft\\WinGet\\Packages\\ggml.llamacpp_Microsoft.Winget.Source_8wekyb3d8bbwe"
+        - "C:\\Users\\pauln\\.deno\\bin"
+        - "C:\\Users\\pauln\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python313\\Scripts"
+        - "C:\\Users\\pauln\\AppData\\Local\\PowerToys\\DSCModules\\"
+        - "C:\\Users\\pauln\\AppData\\Roaming\\npm"
+        - "C:\\Users\\pauln\\bin"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/BandwidthGovernor"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "C:/Program Files"
+        - "C:/Program Files (x86)"
+        - "C:/Program Files/CMake"
+        - "C:/Program Files (x86)/BandwidthGovernor"
+...
+
+---
+events:
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.3/Modules/FindCUDAToolkit.cmake:1101 (find_path)"
+      - "CMakeLists.txt:54 (find_package)"
+    mode: "path"
+    variable: "CUDAToolkit_CUBLAS_INCLUDE_DIR"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "cublas_v2.h"
+    candidate_directories:
+      - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.9/include/"
+    found: "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.9/include/"
+    search_context:
+      ENV{PATH}:
+        - "C:\\Program Files\\WindowsApps\\Microsoft.PowerShell_7.6.5.0_x64__8wekyb3d8bbwe"
+        - "C:\\Program Files\\FireDaemon OpenSSL 4\\bin\\"
+        - "C:\\Program Files\\coreutils\\bin"
+        - "C:\\Program Files\\ImageMagick-7.1.2-Q16-HDRI"
+        - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.1\\bin\\x64"
+        - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v12.9\\bin"
+        - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v12.9\\libnvvp"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Users\\pauln\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\"
+        - "C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common"
+        - "C:\\Program Files\\NVIDIA Corporation\\NVIDIA App\\NvDLISR"
+        - "C:\\Ffmpeg\\bin"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files\\Go\\bin"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Program Files\\nodejs\\"
+        - "C:\\Program Files\\GitHub CLI\\"
+        - "C:\\Program Files\\Mullvad VPN\\resources"
+        - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v13.1\\bin"
+        - "C:\\Users\\pauln\\AppData\\Local\\Programs\\Python\\Python313\\Scripts\\"
+        - "C:\\Users\\pauln\\AppData\\Local\\Programs\\Python\\Python313\\"
+        - "C:\\Users\\pauln\\AppData\\Local\\Programs\\Python\\Launcher\\"
+        - "C:\\Users\\pauln\\.cargo\\bin"
+        - "C:\\Users\\pauln\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\pauln\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\pauln\\.lmstudio\\bin"
+        - "C:\\Users\\pauln\\AppData\\Local\\Pandoc\\"
+        - "C:\\Users\\pauln\\AppData\\Local\\Microsoft\\WinGet\\Links"
+        - "C:\\Users\\pauln\\AppData\\Local\\GitHubDesktop\\bin"
+        - "C:\\Users\\pauln\\go\\bin"
+        - "C:\\Users\\pauln\\AppData\\Local\\Microsoft\\WinGet\\Packages\\ggml.llamacpp_Microsoft.Winget.Source_8wekyb3d8bbwe"
+        - "C:\\Users\\pauln\\.deno\\bin"
+        - "C:\\Users\\pauln\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python313\\Scripts"
+        - "C:\\Users\\pauln\\AppData\\Local\\PowerToys\\DSCModules\\"
+        - "C:\\Users\\pauln\\AppData\\Roaming\\npm"
+        - "C:\\Users\\pauln\\bin"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/BandwidthGovernor"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "C:/Program Files"
+        - "C:/Program Files (x86)"
+        - "C:/Program Files/CMake"
+        - "C:/Program Files (x86)/BandwidthGovernor"
+...

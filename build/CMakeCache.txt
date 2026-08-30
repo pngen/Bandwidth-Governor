@@ -20,11 +20,12 @@ BG_BUILD_BENCHMARKS:BOOL=ON
 //Build the Bandwidth Governor CLI
 BG_BUILD_CLI:BOOL=ON
 
-//Build the downstream find_package consumer
+//Build the downstream find_package consumer (standalone; built
+// against the install prefix)
 BG_BUILD_CONSUMER:BOOL=ON
 
 //Build the CUDA backend
-BG_BUILD_CUDA:BOOL=OFF
+BG_BUILD_CUDA:BOOL=ON
 
 //Build the Bandwidth Governor examples
 BG_BUILD_EXAMPLES:BOOL=ON
@@ -609,7 +610,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_MT
 CMAKE_MT-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=7
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=6
 //Platform information initialized
 CMAKE_PLATFORM_INFO_INITIALIZED:INTERNAL=1
 //noop for ranlib

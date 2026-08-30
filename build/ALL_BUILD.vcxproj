@@ -178,6 +178,14 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Project>{1274389F-0498-3E51-9985-86DE5D8BE0A7}</Project>
       <Name>bg</Name>
     </ProjectReference>
+    <ProjectReference Include="E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\build\benchmarks\bg_bench.vcxproj">
+      <Project>{FA908E0F-F017-38DC-AF44-F291A13C8B4E}</Project>
+      <Name>bg_bench</Name>
+    </ProjectReference>
+    <ProjectReference Include="E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\build\examples\bg_examples.vcxproj">
+      <Project>{8D1E907C-E39A-3492-BC18-C85ED6928B38}</Project>
+      <Name>bg_examples</Name>
+    </ProjectReference>
     <ProjectReference Include="E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\build\tests\bg_mp.vcxproj">
       <Project>{1175B097-E4DA-3B4E-B86A-D7C3C2BFE77B}</Project>
       <Name>bg_mp</Name>

@@ -61,7 +61,7 @@ add_library(Bandwidth::bgcore STATIC IMPORTED)
 set_target_properties(Bandwidth::bgcore PROPERTIES
   INTERFACE_COMPILE_FEATURES "cxx_std_20"
   INTERFACE_INCLUDE_DIRECTORIES "${_IMPORT_PREFIX}/include;${_IMPORT_PREFIX}/include"
-  INTERFACE_LINK_LIBRARIES "\$<LINK_ONLY:ws2_32>"
+  INTERFACE_LINK_LIBRARIES "\$<LINK_ONLY:ws2_32>;\$<LINK_ONLY:CUDA::cudart>"
 )
 
 # Load information for each installed configuration.

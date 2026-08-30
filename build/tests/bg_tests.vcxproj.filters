@@ -7,6 +7,18 @@
     <ClCompile Include="E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\tests\test_core.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\tests\test_cuda.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\tests\test_concurrency.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\tests\test_adversarial.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\tests\test_property.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\tests\CMakeLists.txt" />

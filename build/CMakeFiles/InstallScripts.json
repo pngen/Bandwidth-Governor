@@ -6,8 +6,7 @@
 		"E:/The Journey/Coding/GitHub/production/Bandwidth-Governor/build/workers/cmake_install.cmake",
 		"E:/The Journey/Coding/GitHub/production/Bandwidth-Governor/build/tests/cmake_install.cmake",
 		"E:/The Journey/Coding/GitHub/production/Bandwidth-Governor/build/benchmarks/cmake_install.cmake",
-		"E:/The Journey/Coding/GitHub/production/Bandwidth-Governor/build/examples/cmake_install.cmake",
-		"E:/The Journey/Coding/GitHub/production/Bandwidth-Governor/build/consumer/cmake_install.cmake"
+		"E:/The Journey/Coding/GitHub/production/Bandwidth-Governor/build/examples/cmake_install.cmake"
 	],
 	"Parallel" : false
 }

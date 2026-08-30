@@ -13,9 +13,9 @@ E:/The Journey/Coding/GitHub/production/Bandwidth-Governor/build/tests/CMakeFile
 E:/The Journey/Coding/GitHub/production/Bandwidth-Governor/build/tests/CMakeFiles/bg_mp.dir
 E:/The Journey/Coding/GitHub/production/Bandwidth-Governor/build/tests/CMakeFiles/RUN_TESTS.dir
 E:/The Journey/Coding/GitHub/production/Bandwidth-Governor/build/tests/CMakeFiles/INSTALL.dir
+E:/The Journey/Coding/GitHub/production/Bandwidth-Governor/build/benchmarks/CMakeFiles/bg_bench.dir
 E:/The Journey/Coding/GitHub/production/Bandwidth-Governor/build/benchmarks/CMakeFiles/RUN_TESTS.dir
 E:/The Journey/Coding/GitHub/production/Bandwidth-Governor/build/benchmarks/CMakeFiles/INSTALL.dir
+E:/The Journey/Coding/GitHub/production/Bandwidth-Governor/build/examples/CMakeFiles/bg_examples.dir
 E:/The Journey/Coding/GitHub/production/Bandwidth-Governor/build/examples/CMakeFiles/RUN_TESTS.dir
 E:/The Journey/Coding/GitHub/production/Bandwidth-Governor/build/examples/CMakeFiles/INSTALL.dir
-E:/The Journey/Coding/GitHub/production/Bandwidth-Governor/build/consumer/CMakeFiles/RUN_TESTS.dir
-E:/The Journey/Coding/GitHub/production/Bandwidth-Governor/build/consumer/CMakeFiles/INSTALL.dir
