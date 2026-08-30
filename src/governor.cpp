@@ -353,6 +353,11 @@ struct Governor::Impl {
 Governor::Governor(GovernorConfig cfg) : impl_(std::make_unique<Impl>(std::move(cfg))) {}
 Governor::~Governor() = default;
 
+CoordinatorId Governor::coordinator() const {
+  std::lock_guard<std::mutex> lk(impl_->mutex);
+  return impl_->coordinator;
+}
+
 CoordinatorEpoch Governor::epoch() const {
   std::lock_guard<std::mutex> lk(impl_->mutex);
   return impl_->epoch;
@@ -898,6 +903,8 @@ std::vector<FlowSnapshot> Governor::list_flows() const {
     s.retry_count = f.retries;
     s.starvation_ms = f.starvation_ms;
     s.reservation = f.reservation;
+    s.assigned_worker = f.assigned_worker;
+    s.assigned_boot = f.assigned_boot;
     s.last_error = f.last_error;
     out.push_back(std::move(s));
   }
@@ -923,6 +930,8 @@ std::optional<FlowSnapshot> Governor::flow(const FlowId& fl) const {
   s.retry_count = f.retries;
   s.starvation_ms = f.starvation_ms;
   s.reservation = f.reservation;
+  s.assigned_worker = f.assigned_worker;
+  s.assigned_boot = f.assigned_boot;
   s.last_error = f.last_error;
   return s;
 }
@@ -1075,7 +1084,13 @@ bool Governor::release_reservation(const ReservationId& id) {
 // ---- distributed authority -----------------------------------------------------
 WorkerId Governor::register_worker(const WorkerRegistration& reg) {
   std::lock_guard<std::mutex> lk(impl_->mutex);
-  WorkerRT& w = impl_->workers[reg.worker];
+  Impl& g = *impl_;
+  auto existing = g.workers.find(reg.worker);
+  bool is_restart = false;
+  if (existing != g.workers.end()) {
+    is_restart = existing->second.alive && existing->second.boot != reg.boot;
+  }
+  WorkerRT& w = g.workers[reg.worker];
   w.id = reg.worker;
   w.boot = reg.boot;
   w.backend = reg.backend;
@@ -1083,15 +1098,60 @@ WorkerId Governor::register_worker(const WorkerRegistration& reg) {
   w.alive = true;
   w.back_resources.clear();
   for (const ResourceSpec& rs : reg.inventory) {
-    ResRT& r = impl_->resources[rs.id];
+    ResRT& r = g.resources[rs.id];
     r.spec = rs;
     if (rs.generation.is_null())
-      r.spec.generation = fresh_generation<CapacityGeneration>(impl_->gen.next64());
+      r.spec.generation = fresh_generation<CapacityGeneration>(g.gen.next64());
     r.measured = 0.0;
-    r.last_ms = impl_->now();
+    r.last_ms = g.now();
     w.back_resources.push_back(rs.id);
   }
-  impl_->recompute_governed();
+  if (is_restart) {
+    // A worker restarted with a fresh boot: roll authority for any flow that was
+    // running on this worker under the OLD boot. The old reservation is released
+    // exactly once, a new AttemptId and a new generation-fenced reservation bound
+    // to the new boot are created, and the flow is re-queued for dispatch.
+    for (auto& [fid, f] : g.flows) {
+      (void)fid;
+      if (f.state != FlowState::Running || !f.assigned_worker ||
+          *f.assigned_worker != reg.worker)
+        continue;
+      if (f.reservation) g.release_reservation_internal(*f.reservation);
+      f.retries++;
+      f.spec.attempt = g.gen.next<AttemptId>();
+      f.spec.generation = next_generation(f.spec.generation);
+      f.assigned_worker = reg.worker;
+      f.assigned_boot = reg.boot;
+      f.bytes_done = 0;
+      f.last_error = "worker restarted; retry with new attempt";
+      auto pit = g.paths.find(f.spec.path);
+      if (pit != g.paths.end()) {
+        Reservation rsv;
+        rsv.id = g.gen.next<ReservationId>();
+        rsv.flow = f.spec.id;
+        rsv.attempt = f.spec.attempt;
+        rsv.flow_generation = f.spec.generation;
+        rsv.path = f.spec.path;
+        rsv.epoch = g.epoch;
+        rsv.worker_boot = reg.boot;
+        rsv.capacity_generation = g.capacity_generation;
+        rsv.state = ReservationState::Active;
+        double grant = std::max(f.granted, f.spec.requested_min.value());
+        if (grant <= 0.0) grant = f.spec.requested_preferred.value();
+        for (const PathHop& hop : pit->second.hops) {
+          ResourceAllocation al;
+          al.resource = hop.resource;
+          al.allocated = Capacity::make(grant);
+          rsv.allocations.push_back(al);
+        }
+        g.reservations[rsv.id] = rsv;
+        f.reservation = rsv.id;
+        f.granted = grant;
+      }
+      g.set_flow_state(f, FlowState::Reserved);
+    }
+  }
+  g.recompute_governed();
   return reg.worker;
 }
 
@@ -1254,6 +1314,8 @@ FlowSnapshot to_flow_snap(const FlowRT& f, double now_ms) {
   s.retry_count = f.retries;
   s.starvation_ms = f.starvation_ms;
   s.reservation = f.reservation;
+  s.assigned_worker = f.assigned_worker;
+  s.assigned_boot = f.assigned_boot;
   s.last_error = f.last_error;
   return s;
 }

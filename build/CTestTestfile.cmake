@@ -4,9 +4,9 @@
 # 
 # This file includes the relevant testing commands required for 
 # testing this directory and lists subdirectories to be tested as well.
+subdirs("cli")
+subdirs("workers")
 subdirs("tests")
 subdirs("benchmarks")
 subdirs("examples")
-subdirs("cli")
-subdirs("workers")
 subdirs("consumer")

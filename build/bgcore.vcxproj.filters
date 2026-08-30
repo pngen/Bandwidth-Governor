@@ -31,6 +31,15 @@
     <ClCompile Include="E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\src\backend.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\src\wire.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\src\transport.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\src\backend_cuda.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\CMakeLists.txt" />

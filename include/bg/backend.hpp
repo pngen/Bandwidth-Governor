@@ -41,4 +41,7 @@ class Backend {
   virtual bool all_done() const = 0;  // no active work remains
 };
 
+// Deterministic synthetic backend for exhaustive tests and offline validation.
+std::unique_ptr<Backend> make_synthetic_backend(const std::vector<ResourceSpec>& inventory);
+
 }  // namespace bg

@@ -287,6 +287,93 @@ BG_TEST("governor: disjoint paths are independent") {
   CHECK(std::abs(fb->granted.value() - 600.0e6) < 1e3);
 }
 
+BG_TEST("governor: distributed dispatch promotes flow to running") {
+  Fixture f;
+  f.g.advance_ms(0.0);
+  WorkerRegistration wr;
+  wr.worker = WorkerId(0, 1);
+  wr.boot = WorkerBootId(0, 10);
+  ResourceSpec inv;
+  inv.id = f.res;
+  inv.class_ = ResourceClass::Pcie;
+  inv.source = "n";
+  inv.destination = "n";
+  inv.nominal = Capacity::make(1e9);
+  inv.generation = fresh_generation<CapacityGeneration>(1);
+  wr.inventory = {inv};
+  f.g.register_worker(wr);
+  TenantId t(0, 99);
+  WorkloadId w(0, 98);
+  FlowSpec s = make_flow(f, t, w, 0.0, 300.0e6, 300.0e6, 40);
+  AdmissionResult r = f.g.submit_flow(s);
+  REQUIRE(r.admitted);
+  f.g.advance_ms(1.0);
+  f.g.tick();
+  auto fs = f.g.flow(s.id);
+  REQUIRE(fs.has_value());
+  CHECK(fs->state == FlowState::Running);
+  CHECK(fs->assigned_worker.has_value());
+  // complete via the worker with the correct boot, then verify accounting zero.
+  CHECK(f.g.report_completion(s.id, s.attempt, s.generation, WorkerBootId(0, 10), s.byte_count));
+  CHECK(f.g.accounting_at_zero());
+}
+
+BG_TEST("governor: stale authority completion is rejected") {
+  Fixture f;
+  f.g.advance_ms(0.0);
+  WorkerRegistration wr;
+  wr.worker = WorkerId(0, 1);
+  wr.boot = WorkerBootId(0, 10);
+  ResourceSpec inv;
+  inv.id = f.res;
+  inv.class_ = ResourceClass::Pcie;
+  inv.source = "n";
+  inv.destination = "n";
+  inv.nominal = Capacity::make(1e9);
+  inv.generation = fresh_generation<CapacityGeneration>(1);
+  wr.inventory = {inv};
+  f.g.register_worker(wr);
+  TenantId t(0, 97);
+  WorkloadId w(0, 96);
+  FlowSpec s = make_flow(f, t, w, 0.0, 300.0e6, 300.0e6, 41);
+  AdmissionResult r = f.g.submit_flow(s);
+  REQUIRE(r.admitted);
+  f.g.advance_ms(1.0);
+  f.g.tick();
+  auto fs = f.g.flow(s.id);
+  REQUIRE(fs.has_value());
+  CHECK(fs->state == FlowState::Running);
+  // stale boot completion must be rejected and mutate nothing.
+  CHECK(!f.g.report_completion(s.id, s.attempt, s.generation, WorkerBootId(0, 999), s.byte_count));
+  auto fs2 = f.g.flow(s.id);
+  REQUIRE(fs2.has_value());
+  CHECK(fs2->state == FlowState::Running);
+  // stale attempt must be rejected.
+  CHECK(!f.g.report_completion(s.id, AttemptId(0, 999), s.generation, WorkerBootId(0, 10), s.byte_count));
+  // restart the worker with a fresh boot: flow must be rolled (new attempt) and
+  // must NOT be completed by the stale completion.
+  WorkerBootId newboot(0, 11);
+  WorkerRegistration wr2;
+  wr2.worker = WorkerId(0, 1);
+  wr2.boot = newboot;
+  wr2.inventory = {inv};
+  f.g.register_worker(wr2);
+  f.g.advance_ms(1.0);
+  f.g.tick();
+  auto fs3 = f.g.flow(s.id);
+  REQUIRE(fs3.has_value());
+  std::printf("  stale_test: state=%s attempt_diff=%d assigned=%d\n",
+              flow_state_name(fs3->state), (int)(fs3->spec.attempt != s.attempt),
+              (int)fs3->assigned_worker.has_value());
+  CHECK(fs3->state == FlowState::Running);
+  CHECK(fs3->spec.attempt != s.attempt);  // retry got a new attempt id
+  // complete on the fresh boot with the new attempt.
+  bool comp_ok = f.g.report_completion(s.id, fs3->spec.attempt, fs3->spec.generation, newboot, s.byte_count);
+  std::printf("  stale_test: comp_ok=%d\n", (int)comp_ok);
+  CHECK(comp_ok);
+  CHECK(f.g.accounting_at_zero());
+}
+
 // ---- Persistence -----------------------------------------------------------------
 BG_TEST("persistence: round-trip and accounting") {
   Fixture f;

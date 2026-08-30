@@ -8,3 +8,6 @@ E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\src\path.cpp;E:\The J
 E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\src\governor.cpp;E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\build\bgcore.dir\Release\governor.obj
 E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\src\persist.cpp;E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\build\bgcore.dir\Release\persist.obj
 E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\src\backend.cpp;E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\build\bgcore.dir\Release\backend.obj
+E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\src\wire.cpp;E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\build\bgcore.dir\Release\wire.obj
+E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\src\transport.cpp;E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\build\bgcore.dir\Release\transport.obj
+E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\src\backend_cuda.cpp;E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\build\bgcore.dir\Release\backend_cuda.obj

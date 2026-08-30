@@ -322,6 +322,9 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\src\governor.cpp" />
     <ClCompile Include="E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\src\persist.cpp" />
     <ClCompile Include="E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\src\backend.cpp" />
+    <ClCompile Include="E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\src\wire.cpp" />
+    <ClCompile Include="E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\src\transport.cpp" />
+    <ClCompile Include="E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\src\backend_cuda.cpp" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

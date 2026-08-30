@@ -1,2 +1,2 @@
-# Bandwidth Governor CLI (populated later).
-message(STATUS "CLI subdirectory placeholder")
+add_executable(bg main.cpp)
+target_link_libraries(bg PRIVATE bgcore)

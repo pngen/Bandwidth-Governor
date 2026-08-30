@@ -34,6 +34,16 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
+  include("E:/The Journey/Coding/GitHub/production/Bandwidth-Governor/build/cli/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("E:/The Journey/Coding/GitHub/production/Bandwidth-Governor/build/workers/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
   include("E:/The Journey/Coding/GitHub/production/Bandwidth-Governor/build/tests/cmake_install.cmake")
 endif()
 
@@ -45,16 +55,6 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
   include("E:/The Journey/Coding/GitHub/production/Bandwidth-Governor/build/examples/cmake_install.cmake")
-endif()
-
-if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  # Include the install script for the subdirectory.
-  include("E:/The Journey/Coding/GitHub/production/Bandwidth-Governor/build/cli/cmake_install.cmake")
-endif()
-
-if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  # Include the install script for the subdirectory.
-  include("E:/The Journey/Coding/GitHub/production/Bandwidth-Governor/build/workers/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)

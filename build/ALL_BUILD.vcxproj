@@ -174,6 +174,14 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </ProjectReference>
+    <ProjectReference Include="E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\build\cli\bg.vcxproj">
+      <Project>{1274389F-0498-3E51-9985-86DE5D8BE0A7}</Project>
+      <Name>bg</Name>
+    </ProjectReference>
+    <ProjectReference Include="E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\build\tests\bg_mp.vcxproj">
+      <Project>{1175B097-E4DA-3B4E-B86A-D7C3C2BFE77B}</Project>
+      <Name>bg_mp</Name>
+    </ProjectReference>
     <ProjectReference Include="E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\build\tests\bg_tests.vcxproj">
       <Project>{93E9A97D-D475-30E1-BFDE-3DBEF0041ABC}</Project>
       <Name>bg_tests</Name>
@@ -181,6 +189,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ProjectReference Include="E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\build\bgcore.vcxproj">
       <Project>{5B0884EE-669E-3447-B369-A10B87862C9C}</Project>
       <Name>bgcore</Name>
+    </ProjectReference>
+    <ProjectReference Include="E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\build\workers\bgworker.vcxproj">
+      <Project>{A9C47E05-528F-3882-845C-EE14CB0A79F7}</Project>
+      <Name>bgworker</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
