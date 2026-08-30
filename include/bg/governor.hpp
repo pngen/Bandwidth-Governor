@@ -65,6 +65,8 @@ struct FlowSnapshot {
   uint64_t retry_count = 0;
   double starvation_ms = 0.0;
   std::optional<ReservationId> reservation;
+  std::optional<WorkerId> assigned_worker;   // worker driving this flow (if any)
+  WorkerBootId assigned_boot;                // that worker's boot authority
   std::string last_error;
 };
 
@@ -154,6 +156,7 @@ class Governor {
   // --- distributed authority ---
   WorkerId register_worker(const WorkerRegistration& reg);
   void deregister_worker(const WorkerId& w);
+  CoordinatorId coordinator() const;
   CoordinatorEpoch epoch() const;
   CapacityGeneration capacity_generation() const;
   bool report_progress(const FlowId& flow, const AttemptId& attempt,

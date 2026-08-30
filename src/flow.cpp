@@ -43,18 +43,19 @@ std::optional<FlowState> flow_transition(FlowState from, FlowState to) noexcept 
     case FlowState::Running:
       if (to == FlowState::Throttled || to == FlowState::Preempted ||
           to == FlowState::Completed || to == FlowState::Cancelled ||
-          to == FlowState::Failed)
+          to == FlowState::Failed || to == FlowState::Reserved)
         return to;
       break;
     case FlowState::Throttled:
       if (to == FlowState::Running || to == FlowState::Preempted ||
           to == FlowState::Completed || to == FlowState::Cancelled ||
-          to == FlowState::Failed)
+          to == FlowState::Failed || to == FlowState::Reserved)
         return to;
       break;
     case FlowState::Preempted:
       if (to == FlowState::Queued || to == FlowState::Running ||
-          to == FlowState::Cancelled || to == FlowState::Failed)
+          to == FlowState::Cancelled || to == FlowState::Failed ||
+          to == FlowState::Reserved)
         return to;
       break;
     case FlowState::Completed:

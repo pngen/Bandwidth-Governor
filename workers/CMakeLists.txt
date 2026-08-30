@@ -1,2 +1,2 @@
-# Bandwidth Governor worker runtime (populated later).
-message(STATUS "Workers subdirectory placeholder")
+add_executable(bgworker bgworker.cpp)
+target_link_libraries(bgworker PRIVATE bgcore)
