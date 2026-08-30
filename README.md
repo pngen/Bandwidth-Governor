@@ -175,14 +175,15 @@ docs/EXAMPLES.md for scenarios, and docs/BENCHMARKS.md for methodology.
 ## Known limitations
 
 - The separate-process coordinator (`bg serve`) and worker (`bgworker`) binaries
-  are provided and register/submit correctly, but the threaded coordinator server
-  currently exhibits a reproducible crash when a worker registers after the server
-  has started. The authoritative state machine, generation fencing, stale-authority
-  rejection, exactly-once reservation release, and worker-restart authority roll
-  are all verified by the deterministic in-process authority proof (`bg_mp`) and
-  the unit test suite; the long-running multi-process server requires further
-  investigation. If you hit this, use the in-process `Governor` API and the proof
-  binaries for validation.
+  register and submit correctly over framed TCP, and a worker registering after the
+  server has started is now stable: concurrent writes to a worker socket are
+  serialised per connection, live worker sockets are owned by shared pointers (no
+  dangling socket references), and the scheduler never performs a blocking send
+  while holding the worker-map lock. The authoritative state machine, generation
+  fencing, stale-authority rejection, exactly-once reservation release, and
+  worker-restart authority roll are verified by the deterministic in-process
+  authority proof (`bg_mp`), the unit test suite, and a real multiprocess end-to-end
+  proof (coordinator + workers spawned as OS processes, client over framed TCP).
 - On validated hardware the runtime exercises real bounded host-to-device CUDA
   transfers (RTX 5090 / sm_120 / CUDA 13.1). Unavailable fabric (multi-GPU NVLink
   hardware, RDMA, DPU, CXL) is represented only through explicitly labeled
