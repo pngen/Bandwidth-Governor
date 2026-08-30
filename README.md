@@ -172,6 +172,22 @@ cmake --build consumer-build --config Release
 See docs/BUILDING.md for details, docs/ARCHITECTURE.md for the design,
 docs/EXAMPLES.md for scenarios, and docs/BENCHMARKS.md for methodology.
 
+## Known limitations
+
+- The separate-process coordinator (`bg serve`) and worker (`bgworker`) binaries
+  are provided and register/submit correctly, but the threaded coordinator server
+  currently exhibits a reproducible crash when a worker registers after the server
+  has started. The authoritative state machine, generation fencing, stale-authority
+  rejection, exactly-once reservation release, and worker-restart authority roll
+  are all verified by the deterministic in-process authority proof (`bg_mp`) and
+  the unit test suite; the long-running multi-process server requires further
+  investigation. If you hit this, use the in-process `Governor` API and the proof
+  binaries for validation.
+- On validated hardware the runtime exercises real bounded host-to-device CUDA
+  transfers (RTX 5090 / sm_120 / CUDA 13.1). Unavailable fabric (multi-GPU NVLink
+  hardware, RDMA, DPU, CXL) is represented only through explicitly labeled
+  synthetic models and is never claimed as validated.
+
 ## License
 
 Apache License 2.0. Copyright 2026 Summon Software Labs.

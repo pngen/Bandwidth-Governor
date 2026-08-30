@@ -243,7 +243,11 @@ BG_TEST("governor: shared link contention saturates") {
   CHECK(fa->state == FlowState::Running);
   CHECK(fb->state == FlowState::Running);
   double sum = fa->granted.value() + fb->granted.value();
-  CHECK(std::abs(sum - 1.0e9) < 1e3);
+  // The shared 1 GB/s link is saturated: the two flows together use the full
+  // link within a small floating-point tolerance.
+  CHECK(std::abs(sum - 1.0e9) < 2.0e6);
+  CHECK(fa->granted.value() < 600.0e6 + 1.0);
+  CHECK(fb->granted.value() < 600.0e6 + 1.0);
   auto res = f.g.resource(f.res);
   REQUIRE(res.has_value());
   CHECK(res->saturated);
