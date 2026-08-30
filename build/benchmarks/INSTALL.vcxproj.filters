@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\build\CMakeFiles\df99d78eac6a901a46a9bf507db51325\INSTALL_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{252C4360-3CAC-3B77-9C50-0EAC93014886}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

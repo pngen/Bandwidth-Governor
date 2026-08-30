@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\src\core.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\src\resource.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\src\flow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\src\policy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\src\explain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\src\reservation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\src\path.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\src\governor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\src\persist.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\src\backend.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="E:\The Journey\Coding\GitHub\production\Bandwidth-Governor\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{F5C01E2A-62FF-3FB3-9571-4CD38AB14827}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

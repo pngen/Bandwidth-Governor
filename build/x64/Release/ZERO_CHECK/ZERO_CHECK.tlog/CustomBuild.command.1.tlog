@@ -1,0 +1,10 @@
+^E:\THE JOURNEY\CODING\GITHUB\PRODUCTION\BANDWIDTH-GOVERNOR\BUILD\CMAKEFILES\68E21766EF345E42C9A3D7D107DB4F4A\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" "-SE:/The Journey/Coding/GitHub/production/Bandwidth-Governor" "-BE:/The Journey/Coding/GitHub/production/Bandwidth-Governor/build" --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "E:/The Journey/Coding/GitHub/production/Bandwidth-Governor/build/BandwidthGovernor.sln"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
