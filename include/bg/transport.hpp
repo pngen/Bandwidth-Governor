@@ -14,6 +14,7 @@
 #include <atomic>
 #include <cstddef>
 #include <cstdint>
+#include <memory>
 #include <mutex>
 #include <string>
 #include <thread>
@@ -42,6 +43,7 @@ class TcpSocket {
   void close() noexcept;
   bool set_no_delay();
   bool shutdown_send();
+  bool shutdown_both();
   uint16_t local_port() const;
 
  private:
@@ -68,8 +70,18 @@ class CoordinatorServer {
   uint16_t port() const;
 
  private:
+  // A live worker connection: owns its accepted socket and serialises every write
+  // to that socket. The scheduler thread and the connection thread BOTH write to
+  // the same socket (the scheduler sends dispatch/grant, the connection thread
+  // sends acks/register-ack) so concurrent writes MUST be serialised or the
+  // framed stream interleaves and the peer cannot decode it. A blocking send is
+  // never done while workers_mutex_ is held: the socket is kept alive by a
+  // shared_ptr reference instead.
+  struct Conn;
+  using ConnPtr = std::shared_ptr<Conn>;
+
   void accept_loop();
-  void handle_connection(TcpSocket s);
+  void handle_connection(ConnPtr conn);
   void scheduler_loop();
   void unregister_connection(WorkerId w);
 
@@ -80,7 +92,7 @@ class CoordinatorServer {
   std::thread scheduler_thread_;
   std::vector<std::thread> conn_threads_;
   std::mutex conn_mutex_;
-  std::unordered_map<WorkerId, TcpSocket*> workers_;  // live worker sockets (owned by connection threads)
+  std::unordered_map<WorkerId, ConnPtr> workers_;  // live worker connections
   std::mutex workers_mutex_;
   std::unordered_map<FlowId, AttemptId> dispatched_;  // last-dispatched attempt per flow
   uint16_t port_ = 0;

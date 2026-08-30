@@ -147,6 +147,14 @@ bool TcpSocket::shutdown_send() {
 #endif
 }
 
+bool TcpSocket::shutdown_both() {
+#ifdef _WIN32
+  return ::shutdown(native(handle_), SD_BOTH) == 0;
+#else
+  return ::shutdown(native(handle_), SHUT_RDWR) == 0;
+#endif
+}
+
 uint16_t TcpSocket::local_port() const {
   if (!valid()) return 0;
   sockaddr_in a{};
@@ -223,6 +231,14 @@ std::optional<DecodedFrame> recv_frame(TcpSocket& s) {
 // ---------------------------------------------------------------------------
 // CoordinatorServer
 // ---------------------------------------------------------------------------
+// A live worker connection owns its accepted socket. The per-connection write
+// mutex serialises every write to the peer so the scheduler thread and the
+// connection thread cannot interleave their frames on the stream.
+struct CoordinatorServer::Conn {
+  TcpSocket socket;
+  std::mutex write_mutex;
+};
+
 CoordinatorServer::CoordinatorServer(Governor& gov) : gov_(gov) {}
 CoordinatorServer::~CoordinatorServer() { stop(); }
 
@@ -246,6 +262,13 @@ void CoordinatorServer::stop() {
   if (accept_thread_.joinable()) accept_thread_.join();
   // signal scheduler loop to exit; it checks running_ each iteration.
   if (scheduler_thread_.joinable()) scheduler_thread_.join();
+  // Unblock connection threads blocked in recv by shutting down their sockets
+  // (this is a shutdown race: a worker connection thread must be able to exit
+  // promptly instead of sitting in recv forever).
+  {
+    std::lock_guard<std::mutex> lk(workers_mutex_);
+    for (auto& [wid, conn] : workers_) { (void)wid; conn->socket.shutdown_both(); }
+  }
   std::lock_guard<std::mutex> lk(conn_mutex_);
   for (auto& t : conn_threads_) if (t.joinable()) t.join();
   conn_threads_.clear();
@@ -261,13 +284,13 @@ void CoordinatorServer::join() {
 
 void CoordinatorServer::accept_loop() {
   while (running_) {
-    TcpSocket conn;
-    if (!listen_.accept_one(conn)) {
+    auto conn = std::make_shared<Conn>();
+    if (!listen_.accept_one(conn->socket)) {
       if (!running_) break;
       continue;
     }
     std::lock_guard<std::mutex> lk(conn_mutex_);
-    conn_threads_.emplace_back([this, c = std::move(conn)]() mutable { handle_connection(std::move(c)); });
+    conn_threads_.emplace_back([this, conn]() mutable { handle_connection(conn); });
   }
 }
 
@@ -276,7 +299,14 @@ void CoordinatorServer::unregister_connection(WorkerId w) {
   workers_.erase(w);
 }
 
-void CoordinatorServer::handle_connection(TcpSocket s) {
+void CoordinatorServer::handle_connection(ConnPtr conn) {
+  TcpSocket& s = conn->socket;
+  // Every write to this peer socket must be serialised with the scheduler
+  // thread's writes, or the two frames interleave on the stream.
+  auto send_on = [&](WireType type, const std::vector<uint8_t>& payload) {
+    std::lock_guard<std::mutex> wlk(conn->write_mutex);
+    send_frame(s, type, payload);
+  };
   while (running_) {
     std::optional<DecodedFrame> opt;
     try {
@@ -296,14 +326,14 @@ void CoordinatorServer::handle_connection(TcpSocket s) {
           {
             std::lock_guard<std::mutex> lk(workers_mutex_);
             workers_.erase(reg.worker);
-            workers_[reg.worker] = &s;  // this thread owns the socket
+            workers_[reg.worker] = conn;  // this connection now owns the worker slot
           }
           payload::RegisterAck ack;
           ack.ok = true;
           ack.coordinator = gov_.coordinator();
           ack.epoch = gov_.epoch();
           ack.generation = gov_.capacity_generation();
-          send_frame(s, WireType::RegisterAck, payload::encode_register_ack(ack));
+          send_on(WireType::RegisterAck, payload::encode_register_ack(ack));
           break;  // keep reading this worker's progress/completion on the same connection
         }
         case WireType::SubmitFlow: {
@@ -314,42 +344,42 @@ void CoordinatorServer::handle_connection(TcpSocket s) {
           w.flow = spec;
           w.decision = r.decision;
           w.reservation = r.reservation;
-          send_frame(s, WireType::SubmitAck, payload::encode_admission(w));
+          send_on(WireType::SubmitAck, payload::encode_admission(w));
           break;
         }
         case WireType::Progress: {
           auto rep = payload::decode_report(body.data(), body.size());
           bool ok = gov_.report_progress(rep.flow, rep.attempt, rep.fgen, rep.boot, rep.bytes);
           payload::Ack ack; ack.ok = ok;
-          send_frame(s, WireType::Ack, payload::encode_ack(ack));
+          send_on(WireType::Ack, payload::encode_ack(ack));
           break;
         }
         case WireType::Completion: {
           auto rep = payload::decode_report(body.data(), body.size());
           bool ok = gov_.report_completion(rep.flow, rep.attempt, rep.fgen, rep.boot, rep.bytes);
           payload::Ack ack; ack.ok = ok;
-          send_frame(s, WireType::Ack, payload::encode_ack(ack));
+          send_on(WireType::Ack, payload::encode_ack(ack));
           break;
         }
         case WireType::QueryResources: {
           payload::Response resp;
           resp.ok = true;
           resp.body = payload::encode_resource_snapshot(gov_.list_resources());
-          send_frame(s, WireType::Response, payload::encode_response(resp));
+          send_on(WireType::Response, payload::encode_response(resp));
           break;
         }
         case WireType::QueryFlows: {
           payload::Response resp;
           resp.ok = true;
           resp.body = payload::encode_flow_snapshot(gov_.list_flows());
-          send_frame(s, WireType::Response, payload::encode_response(resp));
+          send_on(WireType::Response, payload::encode_response(resp));
           break;
         }
         case WireType::QueryReservations: {
           payload::Response resp;
           resp.ok = true;
           resp.body = payload::encode_reservation_snapshot(gov_.list_reservations());
-          send_frame(s, WireType::Response, payload::encode_response(resp));
+          send_on(WireType::Response, payload::encode_response(resp));
           break;
         }
         case WireType::Snapshot: {
@@ -357,7 +387,7 @@ void CoordinatorServer::handle_connection(TcpSocket s) {
           payload::Response resp;
           resp.ok = true;
           resp.body = bytes;
-          send_frame(s, WireType::Response, payload::encode_response(resp));
+          send_on(WireType::Response, payload::encode_response(resp));
           break;
         }
         case WireType::Save: case WireType::Load: {
@@ -365,7 +395,7 @@ void CoordinatorServer::handle_connection(TcpSocket s) {
           resp.ok = true;
           if (t == WireType::Save) gov_.save_file("bandwidth.entity");
           else gov_.load_file("bandwidth.entity");
-          send_frame(s, WireType::Response, payload::encode_response(resp));
+          send_on(WireType::Response, payload::encode_response(resp));
           break;
         }
         default:
@@ -375,14 +405,14 @@ void CoordinatorServer::handle_connection(TcpSocket s) {
       payload::Ack ack;
       ack.ok = false;
       ack.reason = e.what();
-      send_frame(s, WireType::Ack, payload::encode_ack(ack));
+      send_on(WireType::Ack, payload::encode_ack(ack));
     }
   }
-  // On disconnect, unregister this socket from the worker map if it is ours.
+  // On disconnect, unregister this connection from the worker map if it is ours.
   {
     std::lock_guard<std::mutex> lk(workers_mutex_);
     for (auto it = workers_.begin(); it != workers_.end();) {
-      if (it->second == &s) it = workers_.erase(it);
+      if (it->second == conn) it = workers_.erase(it);
       else ++it;
     }
   }
@@ -402,33 +432,47 @@ void CoordinatorServer::scheduler_loop() {
       if (f.state != FlowState::Running || !f.assigned_worker || !f.reservation) continue;
       auto rsv = gov_.reservation(*f.reservation);
       if (!rsv) continue;
-      // Hold the worker-map lock while sending so the connection thread cannot
-      // concurrently destroy the socket out from under us (dangling pointer).
+      // Take a reference to the connection (keeps the socket alive), then send
+      // OUTSIDE the worker-map lock so a blocking send cannot stall every other
+      // connection registration. The per-connection write mutex serialises with
+      // the connection thread's own writes so frames never interleave.
+      ConnPtr conn;
       {
         std::lock_guard<std::mutex> lk(workers_mutex_);
         auto it = workers_.find(*f.assigned_worker);
         if (it == workers_.end()) continue;
-        TcpSocket& sock = *it->second;
-        auto dit = dispatched_.find(f.spec.id);
-        bool need_dispatch = (dit == dispatched_.end()) || (dit->second != f.spec.attempt);
-        if (need_dispatch) {
-          payload::Dispatch d;
-          d.flow = f.spec;
-          d.attempt = f.spec.attempt;
-          d.fgen = f.spec.generation;
-          d.boot = rsv->worker_boot;
-          d.grant = f.granted;
-          d.reservation = *f.reservation;
-          send_frame(sock, WireType::FlowDispatch, payload::encode_dispatch(d));
-          dispatched_[f.spec.id] = f.spec.attempt;
-        } else {
-          payload::Grant g;
-          g.flow = f.spec.id;
-          g.attempt = f.spec.attempt;
-          g.fgen = f.spec.generation;
-          g.boot = rsv->worker_boot;
-          g.grant = f.granted;
-          send_frame(sock, WireType::FlowGrant, payload::encode_grant(g));
+        conn = it->second;
+      }
+      auto dit = dispatched_.find(f.spec.id);
+      bool need_dispatch = (dit == dispatched_.end()) || (dit->second != f.spec.attempt);
+      if (need_dispatch) {
+        payload::Dispatch d;
+        d.flow = f.spec;
+        d.attempt = f.spec.attempt;
+        d.fgen = f.spec.generation;
+        // The dispatch must carry the worker's CURRENT assigned boot, not the
+        // (possibly stale/null) reservation's worker_boot. submit_flow mints the
+        // reservation before a worker is assigned, so the reservation's
+        // worker_boot is null until a worker is bound; a null boot would make the
+        // worker's own reports be rejected as stale and the flow never progress.
+        d.boot = f.assigned_boot;
+        d.grant = f.granted;
+        d.reservation = *f.reservation;
+        {
+          std::lock_guard<std::mutex> wlk(conn->write_mutex);
+          send_frame(conn->socket, WireType::FlowDispatch, payload::encode_dispatch(d));
+        }
+        dispatched_[f.spec.id] = f.spec.attempt;
+      } else {
+        payload::Grant g;
+        g.flow = f.spec.id;
+        g.attempt = f.spec.attempt;
+        g.fgen = f.spec.generation;
+        g.boot = f.assigned_boot;
+        g.grant = f.granted;
+        {
+          std::lock_guard<std::mutex> wlk(conn->write_mutex);
+          send_frame(conn->socket, WireType::FlowGrant, payload::encode_grant(g));
         }
       }
     }
