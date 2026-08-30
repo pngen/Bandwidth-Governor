@@ -1186,6 +1186,17 @@ bool Governor::report_progress(const FlowId& flow, const AttemptId& attempt,
     if (wit == impl_->workers.end() || !wit->second.alive) return false;
     if (wit->second.boot != boot) return false;
   }
+  // Fence against a stale coordinator epoch / capacity generation: a report
+  // carries only attempt+fgen+boot, so additionally confirm the flow's
+  // reservation was minted under the CURRENT authority. A stale epoch or a stale
+  // capacity generation rejects the report and mutates nothing.
+  if (f.reservation) {
+    auto rit = impl_->reservations.find(*f.reservation);
+    if (rit == impl_->reservations.end()) return false;
+    if (rit->second.epoch != impl_->epoch ||
+        rit->second.capacity_generation != impl_->capacity_generation)
+      return false;
+  }
   f.bytes_done = std::max(f.bytes_done, bytes_transferred);
   f.last_ms = impl_->now();
   return true;
@@ -1205,6 +1216,17 @@ bool Governor::report_completion(const FlowId& flow, const AttemptId& attempt,
     auto wit = impl_->workers.find(*f.assigned_worker);
     if (wit == impl_->workers.end() || !wit->second.alive) return false;
     if (wit->second.boot != boot) return false;
+  }
+  // Fence against a stale coordinator epoch / capacity generation: a report
+  // carries only attempt+fgen+boot, so additionally confirm the flow's
+  // reservation was minted under the CURRENT authority. A stale epoch or a stale
+  // capacity generation rejects the report and mutates nothing.
+  if (f.reservation) {
+    auto rit = impl_->reservations.find(*f.reservation);
+    if (rit == impl_->reservations.end()) return false;
+    if (rit->second.epoch != impl_->epoch ||
+        rit->second.capacity_generation != impl_->capacity_generation)
+      return false;
   }
   f.bytes_done = std::max(f.bytes_done, bytes_transferred);
   impl_->set_flow_state(f, FlowState::Completed);
