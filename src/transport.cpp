@@ -402,33 +402,34 @@ void CoordinatorServer::scheduler_loop() {
       if (f.state != FlowState::Running || !f.assigned_worker || !f.reservation) continue;
       auto rsv = gov_.reservation(*f.reservation);
       if (!rsv) continue;
-      TcpSocket* sock = nullptr;
+      // Hold the worker-map lock while sending so the connection thread cannot
+      // concurrently destroy the socket out from under us (dangling pointer).
       {
         std::lock_guard<std::mutex> lk(workers_mutex_);
         auto it = workers_.find(*f.assigned_worker);
-        if (it != workers_.end()) sock = it->second;
-      }
-      if (!sock) continue;
-      auto dit = dispatched_.find(f.spec.id);
-      bool need_dispatch = (dit == dispatched_.end()) || (dit->second != f.spec.attempt);
-      if (need_dispatch) {
-        payload::Dispatch d;
-        d.flow = f.spec;
-        d.attempt = f.spec.attempt;
-        d.fgen = f.spec.generation;
-        d.boot = rsv->worker_boot;
-        d.grant = f.granted;
-        d.reservation = *f.reservation;
-        send_frame(*sock, WireType::FlowDispatch, payload::encode_dispatch(d));
-        dispatched_[f.spec.id] = f.spec.attempt;
-      } else {
-        payload::Grant g;
-        g.flow = f.spec.id;
-        g.attempt = f.spec.attempt;
-        g.fgen = f.spec.generation;
-        g.boot = rsv->worker_boot;
-        g.grant = f.granted;
-        send_frame(*sock, WireType::FlowGrant, payload::encode_grant(g));
+        if (it == workers_.end()) continue;
+        TcpSocket& sock = *it->second;
+        auto dit = dispatched_.find(f.spec.id);
+        bool need_dispatch = (dit == dispatched_.end()) || (dit->second != f.spec.attempt);
+        if (need_dispatch) {
+          payload::Dispatch d;
+          d.flow = f.spec;
+          d.attempt = f.spec.attempt;
+          d.fgen = f.spec.generation;
+          d.boot = rsv->worker_boot;
+          d.grant = f.granted;
+          d.reservation = *f.reservation;
+          send_frame(sock, WireType::FlowDispatch, payload::encode_dispatch(d));
+          dispatched_[f.spec.id] = f.spec.attempt;
+        } else {
+          payload::Grant g;
+          g.flow = f.spec.id;
+          g.attempt = f.spec.attempt;
+          g.fgen = f.spec.generation;
+          g.boot = rsv->worker_boot;
+          g.grant = f.granted;
+          send_frame(sock, WireType::FlowGrant, payload::encode_grant(g));
+        }
       }
     }
     // clean dispatched_ set for flows no longer running
