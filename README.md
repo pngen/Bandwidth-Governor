@@ -139,8 +139,7 @@ generation fencing, stale authority, worker restart, persistence, recovery,
 corruption/truncation rejection, malformed protocol frames, concurrency,
 deterministic replay, accounting-to-zero, and the real CUDA transfer proof.
 Fixed-seed property tests and high-contention concurrency tests are included.
-**There are no test timeouts anywhere** - no CTest TIMEOUT properties, no watchdog
-wrappers, no process time limits.
+All tests run to completion.
 
 ## Benchmarks
 
