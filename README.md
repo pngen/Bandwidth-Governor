@@ -12,7 +12,7 @@ It does **not** move bytes. It arbitrates the *right* to move bytes.
 
 ## The systems boundary
 
-**Transfer Fabric** owns data movement itself: planning transfers, routing,
+**[Transfer Fabric](https://github.com/pngen/Transfer-Fabric)** owns data movement itself: planning transfers, routing,
 staging, copying, overlapping, verification, and backend execution.
 
 **Bandwidth Governor** owns arbitration over scarce bandwidth *capacity* between
